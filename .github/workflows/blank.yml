@@ -48,6 +48,4 @@ jobs:
           #databricks bundle generate job --existing-job-id 5510603730275
         #working-directory: .
       - name: Working dir and list files
-        run: |
-           pwd,
-           ls -al
+        run: pwd
