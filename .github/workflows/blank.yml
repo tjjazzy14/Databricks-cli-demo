@@ -41,5 +41,5 @@ jobs:
         run: |
           databricks repos list,
           databricks jobs list
-          #databricks bundle generate job --existing-job-id 592320742711399
-        #working-directory: .
+          databricks bundle generate job --existing-job-id 592320742711399
+        working-directory: .
