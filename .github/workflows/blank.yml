@@ -26,10 +26,13 @@ jobs:
         uses: actions/checkout@v3
 
       # Install databricks CLI as per https://docs.databricks.com/dev-tools/cli/databricks-cli.html
-      - name: Install databricks CLI
-        run: |
-         curl -fsSL https://raw.githubusercontent.com/databricks/setup-cli/main/install.sh | sh
-
+      #- name: Install databricks CLI
+      #  run: |
+      #   curl -fsSL https://raw.githubusercontent.com/databricks/setup-cli/main/install.sh | sh
+      
+      # See https://github.com/databricks/setup-cli
+      - uses: databricks/setup-cli@main
+      
       # List the databricks repos within the workspace whose credentials
       # are stored in the Github Environment "my-environment"
       - name: List databricks repos
