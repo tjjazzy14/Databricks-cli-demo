@@ -19,6 +19,7 @@ jobs:
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
+    environment: Development
     
     steps:
       - name: Check out repository
@@ -27,4 +28,15 @@ jobs:
       # Install databricks CLI as per https://docs.databricks.com/dev-tools/cli/databricks-cli.html
       - name: Install databricks CLI
         run: |
-         curl -fsSL https://raw.githubusercontent.com/databricks/setup-cli/main/install.sh | sh  
+         curl -fsSL https://raw.githubusercontent.com/databricks/setup-cli/main/install.sh | sh
+
+      # List the databricks repos within the workspace whose credentials
+      # are stored in the Github Environment "my-environment"
+      - name: List databricks repos
+        env:
+          # Note the host is an "environment variable" in the Github Environment
+          # while the token is a "secret" in the Github Environment
+          DATABRICKS_HOST: ${{ vars.DATABRICKS_HOST }}
+          DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+        run: |
+          databricks repos list 
