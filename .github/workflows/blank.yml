@@ -34,9 +34,11 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
-        
-      # The steps that installs the databricks cli 
-      - name: install-databricks-cli
-        uses: microsoft/install-databricks-cli@v1.0.0
-        run: databricks -V
+  databricks-cli:
+      runs-on: ubuntu-latest
+      # The steps that installs the databricks cli
+      steps:
+        - uses: microsoft/install-databricks-cli@v1.0.0
+        - name: install-databricks-cli
+          run: databricks -V
         
