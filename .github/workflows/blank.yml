@@ -42,6 +42,6 @@ jobs:
           databricks repos list,
           databricks jobs list,
           databricks bundle schema > bundle_config_schema.json,
-          cat bundle_config_schema.json
+          #cat bundle_config_schema.json
           #databricks bundle generate job --existing-job-id 5510603730275
-        working-directory: .
+        #working-directory: .
