@@ -44,6 +44,8 @@ jobs:
 
       # check version
       - name: Check-databricks-cli
-          run: |
-            databricks -v
+        run: |
+          databricks -v,
+          pwd,
+          whoami
         
