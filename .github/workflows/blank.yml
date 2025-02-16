@@ -52,4 +52,12 @@ jobs:
           pwd
           cd /home/runner/work/Databricks-cli-demo/Databricks-cli-demo
           ls -al
+      - name: Show bundle_config_schema.json and databricks.yml
+        run:  |
+          echo opening bundle_config_schema.json and databricks.yml
+          cat bundle_config_schema.json
+          echo end of bundle_config_schema.json
+          echo opening databricks.yml
+          cat databricks.yml
+          echo end of databricks.yml
           
