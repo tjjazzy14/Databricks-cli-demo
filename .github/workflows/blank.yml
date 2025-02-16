@@ -25,25 +25,20 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v3
 
-      # Install databricks CLI as per https://docs.databricks.com/dev-tools/cli/databricks-cli.html
-      #- name: Install databricks CLI
-      #  run: |
-      #   curl -fsSL https://raw.githubusercontent.com/databricks/setup-cli/main/install.sh | sh
-      
       # See https://github.com/databricks/setup-cli
       - uses: databricks/setup-cli@main
       
-      # Run the databricks bundles within the workspace whose credentials
-      # are stored in the Github Environment "Development"
+      # List the databricks repos within the workspace whose credentials
+      # are stored in the Github Environment "my-environment"
       - name: List databricks repos
-        run: |
-          databricks bundle deploy
-        working-directory: .
         env:
           # Note the host is an "environment variable" in the Github Environment
           # while the token is a "secret" in the Github Environment
           DATABRICKS_HOST: ${{ vars.DATABRICKS_HOST }}
           DATABRICKS_CLIENT_ID: ${{ vars.DATABRICKS_CLIENT_ID }}
           DATABRICKS_CLIENT_SECRET: ${{ secrets.DATABRICKS_CLIENT_SECRET }}
-          DATABRICKS_BUNDLE_ENV: dev
+          #DATABRICKS_BUNDLE_ENV: dev
+        run: |
+          databricks repos list,
+          databricks jobs list
         
