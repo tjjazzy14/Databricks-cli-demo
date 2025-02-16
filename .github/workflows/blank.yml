@@ -33,9 +33,12 @@ jobs:
       # See https://github.com/databricks/setup-cli
       - uses: databricks/setup-cli@main
       
-      # List the databricks repos within the workspace whose credentials
-      # are stored in the Github Environment "my-environment"
+      # Run the databricks bundles within the workspace whose credentials
+      # are stored in the Github Environment "Development"
       - name: List databricks repos
+        run: |
+          databricks bundle deploy
+        working-directory: .
         env:
           # Note the host is an "environment variable" in the Github Environment
           # while the token is a "secret" in the Github Environment
@@ -43,8 +46,4 @@ jobs:
           DATABRICKS_CLIENT_ID: ${{ vars.DATABRICKS_CLIENT_ID }}
           DATABRICKS_CLIENT_SECRET: ${{ secrets.DATABRICKS_CLIENT_SECRET }}
           DATABRICKS_BUNDLE_ENV: dev
-        run: |
-          databricks repos list,
-          databricks bundle deploy
-        working-directory: .
         
