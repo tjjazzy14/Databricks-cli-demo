@@ -40,6 +40,6 @@ jobs:
           #DATABRICKS_BUNDLE_ENV: dev
         run: |
           databricks repos list,
-          databricks jobs list,
-          databricks bundle generate job --existing-job-id 592320742711399
+          databricks jobs list
+          #databricks bundle generate job --existing-job-id 592320742711399
         #working-directory: .
