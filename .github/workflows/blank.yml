@@ -40,5 +40,5 @@ jobs:
       steps:
         - uses: microsoft/install-databricks-cli@v1.0.0
         - name: install-databricks-cli
-          run: databricks -V
+          run: databricks -v
         
