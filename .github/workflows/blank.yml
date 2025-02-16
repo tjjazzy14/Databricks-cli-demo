@@ -41,5 +41,7 @@ jobs:
         run: |
           databricks repos list,
           databricks jobs list,
-          databricks bundle generate job --existing-job-id 5510603730275
+          databricks bundle schema > bundle_config_schema.json,
+          cat resources/bundle_config_schema.json
+          #databricks bundle generate job --existing-job-id 5510603730275
         working-directory: .
