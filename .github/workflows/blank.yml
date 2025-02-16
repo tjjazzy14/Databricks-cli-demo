@@ -40,18 +40,26 @@ jobs:
           #DATABRICKS_BUNDLE_ENV: dev
         run:  |
           databricks repos list
+
+      # List Jobs    
+      - name: list jobs   
+        run:  | 
           databricks jobs list
-      
+
+      # Test Databricks Assest bundles
       - name: Test Databricks assest bundles
         run: databricks bundle schema > bundle_config_schema.json
           #cat bundle_config_schema.json
           #databricks bundle generate job --existing-job-id 5510603730275
         #working-directory: .
+
+      # Get working directory and list files
       - name: Working dir and list files
         run: |
           pwd
           cd /home/runner/work/Databricks-cli-demo/Databricks-cli-demo
           ls -al
+      # Show json bundle variables and databricks.yml
       - name: Show bundle_config_schema.json and databricks.yml
         run:  |
           echo opening bundle_config_schema.json and databricks.yml
