@@ -1,0 +1,71 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: [ "users/tjjazzy14/databricks-cli-container" ]
+  #pull_request:
+    #branches: [ "main" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    environment: Development
+    
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+
+      # See https://github.com/databricks/setup-cli
+      - uses: databricks/setup-cli@main
+      
+      # List the databricks repos within the workspace whose credentials
+      # are stored in the Github Environment "my-environment"
+      - name: List databricks repos
+        env:
+          # Note the host is an "environment variable" in the Github Environment
+          # while the token is a "secret" in the Github Environment
+          DATABRICKS_HOST: ${{ vars.DATABRICKS_HOST }}
+          DATABRICKS_CLIENT_ID: ${{ vars.DATABRICKS_CLIENT_ID }}
+          DATABRICKS_CLIENT_SECRET: ${{ secrets.DATABRICKS_CLIENT_SECRET }}
+          #DATABRICKS_BUNDLE_ENV: dev
+        run:  |
+          databricks repos list
+
+      # List Jobs    
+      - name: list jobs   
+        run:  | 
+          databricks jobs list
+
+      # Test Databricks Assest bundles
+      - name: Test Databricks assest bundles
+        run: databricks bundle schema > bundle_config_schema.json
+          #cat bundle_config_schema.json
+          #databricks bundle generate job --existing-job-id 5510603730275
+        #working-directory: .
+
+      # Get working directory and list files
+      - name: Working dir and list files
+        run: |
+          pwd
+          cd /home/runner/work/Databricks-cli-demo/Databricks-cli-demo
+          ls -al
+      # Show json bundle variables and databricks.yml
+      - name: Show bundle_config_schema.json and databricks.yml
+        run:  |
+          echo opening bundle_config_schema.json and databricks.yml
+          cat bundle_config_schema.json
+          echo end of bundle_config_schema.json
+          echo opening databricks.yml
+          cat databricks.yml
+          echo end of databricks.yml
+          
